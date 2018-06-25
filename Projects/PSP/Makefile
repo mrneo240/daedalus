@@ -183,13 +183,13 @@ else
 ifdef DEBUG
 	CONFIG=Dev #default config in Debug build is "Dev"
 
-	CFLAGS	= -g -O1 -fno-omit-frame-pointer -G0 -D_DEBUG -MD \
+	CFLAGS	= -g -G0 -O1 -fno-omit-frame-pointer -G0 -D_DEBUG -MD \
 				  -W -Wcast-qual -Wchar-subscripts -Wno-unused -Wpointer-arith\
 				  -Wredundant-decls -Wshadow -Wwrite-strings
 				#-Winline -Wcast-align
 
 else
-	CFLAGS	= -O3 -G0 -DNDEBUG -Wall -MD -ffast-math -fsingle-precision-constant -fpredictive-commoning -mno-check-zero-division -freorder-blocks-and-partition \
+	CFLAGS	= -O2 -G0  -DNDEBUG -Wall -MD -ffast-math -fsingle-precision-constant  \
 					-Wextra \
 					-funroll-loops 
 #					-ffunction-sections -fdata-sections
@@ -231,7 +231,7 @@ LIBS = -lstdc++ -lpsppower -lpspgu -lpspaudio -lpsprtc -lc -lpng -lz -lg -lm -lp
 
 EXTRA_TARGETS = EBOOT.PBP dvemgr.prx exception.prx mediaengine.prx imposectrl.prx daedalus.a $(CORE_OBJS)
 
-PSP_EBOOT_TITLE = DaedalusX64 z2442 update
+PSP_EBOOT_TITLE = DaedalusX64 z2442 $(CONFIG) update_JoynerLucas
 PSP_EBOOT_ICON  = icon0.png
 PSP_EBOOT_PIC1  = pic1.png
 #PSP_EBOOT_ICON1 = ICON1.PMF
@@ -241,14 +241,14 @@ PSP_EBOOT_PIC1  = pic1.png
 
 PSPSDK=$(shell psp-config --pspsdk-path)
 #USE_PSPSDK_LIBC=1
-PSP_FW_VERSION=500
+PSP_FW_VERSION=600
 BUILD_PRX = 1
 PSP_LARGE_MEMORY = 1
 
 EXTRA_CLEAN=$(DEP_FILES)
 
 
-DATA_DIR = ../data
+DATA_DIR = ../../Data/PSP/
 BUILDS_DIR = ./Builds
 BUILDS_PSP_DIR = $(BUILDS_DIR)/PSP
 BUILDS_GAME_DIR = $(BUILDS_PSP_DIR)/GAME
@@ -284,7 +284,7 @@ install: $(PSP_EBOOT) $(TARGET).prx dvemgr.prx exception.prx mediaengine.prx imp
 	-mkdir "$(BUILDS_PSP_DIR)"
 	-mkdir "$(BUILDS_GAME_DIR)"
 	-mkdir "$(BUILDS_DX_DIR)"
-	svn export --force "$(DATA_DIR)" "$(BUILDS_DX_DIR)"
+	cp -Rv "$(DATA_DIR)/." "$(BUILDS_DX_DIR)"
 	cp $(PSP_EBOOT) "$(BUILDS_DX_DIR)"
 	cp *.prx "$(BUILDS_DX_DIR)"
 

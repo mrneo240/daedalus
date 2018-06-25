@@ -292,14 +292,15 @@ static bool	Initialize()
 
 	// If (o) is pressed during boot the Emulator will use 32bit
 	// else use default 16bit color mode
-	SceCtrlData pad;
-	sceCtrlPeekBufferPositive(&pad, 1);
-	if( pad.Buttons & PSP_CTRL_CIRCLE ) g32bitColorMode = true;
-	else g32bitColorMode = false;
+	//SceCtrlData pad;
+	//sceCtrlPeekBufferPositive(&pad, 1);
+	//if( pad.Buttons & PSP_CTRL_CIRCLE ) g32bitColorMode = true;
+	//else g32bitColorMode = false;
+	g32bitColorMode = true;
 
 	// Check for unsupported FW >=4.01 (We use M33 SDK 4.01)
 	// Otherwise PSP model can't be detected correctly
-	DaedalusFWCheck();
+	//DaedalusFWCheck();
 
 	// Initiate MediaEngine
 	//Note: Media Engine is not available for Vita
@@ -346,7 +347,7 @@ static bool	Initialize()
 		else if( PSP_TV_CABLE == 0 )
 			CModule::Unload( HAVE_DVE );	// Stop and unload dvemgr.prx since if no video cable is connected
 	}
-
+	
 	HAVE_DVE = (HAVE_DVE < 0) ? 0 : 1; // 0 == no dvemgr, 1 == dvemgr
 
     sceCtrlSetSamplingCycle(0);
@@ -573,6 +574,7 @@ extern "C"
 {
 int main(int argc, char* argv[])
 {
+	printf("init\n" );
 	if( Initialize() )
 	{
 #ifdef DAEDALUS_BATCH_TEST_ENABLED

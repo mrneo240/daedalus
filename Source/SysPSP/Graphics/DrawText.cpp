@@ -47,8 +47,8 @@ void	CDrawText::Initialise()
 {
     intraFontInit();
 
-	gFonts[ F_REGULAR ] = intraFontLoad( "flash0:/font/ltn8.pgf", INTRAFONT_CACHE_ALL | INTRAFONT_STRING_UTF8 );			// Regular/sans-serif
-	gFonts[ F_LARGE_BOLD ] = intraFontLoad( "flash0:/font/ltn4.pgf", INTRAFONT_CACHE_ALL | INTRAFONT_STRING_UTF8 );		// Large/sans-serif/bold
+	gFonts[ F_REGULAR ] = intraFontLoad( "flash0:/font/ltn8.pgf", INTRAFONT_CACHE_ASCII | INTRAFONT_STRING_UTF8 );			// Regular/sans-serif
+	gFonts[ F_LARGE_BOLD ] = intraFontLoad( "flash0:/font/ltn4.pgf", INTRAFONT_CACHE_ASCII | INTRAFONT_STRING_UTF8 );		// Large/sans-serif/bold
 
 	for( u32 i = 0; i < NUM_FONTS; ++i )
 	{
@@ -96,7 +96,7 @@ u32	CDrawText::Render( EFont font_type, s32 x, s32 y, float scale, const char * 
 	{
 		sceGuEnable(GU_BLEND);
 		sceGuBlendFunc(GU_ADD, GU_SRC_ALPHA, GU_ONE_MINUS_SRC_ALPHA, 0, 0);
-		intraFontSetStyle( font, scale, colour.GetColour(), drop_colour.GetColour(), INTRAFONT_ALIGN_LEFT );
+		intraFontSetStyle( font, scale, colour.GetColour(), drop_colour.GetColour(), 0, INTRAFONT_ALIGN_LEFT );
 		return s32( intraFontPrintEx( font,  x, y, Translate( p_str, length ), length) ) - x;
 	}
 
@@ -112,7 +112,7 @@ s32		CDrawText::GetTextWidth( EFont font_type, const char * p_str, u32 length )
 	intraFont * font( gFonts[ font_type ] );
 	if( font )
 	{
-		intraFontSetStyle( font, 1.0f, 0xffffffff, 0xffffffff, INTRAFONT_ALIGN_LEFT );
+		intraFontSetStyle( font, 1.0f, 0xffffffff, 0xffffffff, 0, INTRAFONT_ALIGN_LEFT );
 		return s32( intraFontMeasureTextEx( font, Translate( p_str, length ), length ) );
 	}
 
