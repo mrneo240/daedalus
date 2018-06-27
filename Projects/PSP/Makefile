@@ -189,8 +189,7 @@ ifdef DEBUG
 else
 	CFLAGS	= -O2 -G0 -DNDEBUG -Wall -MD -ffast-math -fsingle-precision-constant  \
 					-Wextra \
-					-fomit-frame-pointer -ml -m4-single-only -ffunction-sections -s -fno-stack-protector -fno-strict-aliasing
-					#-funroll-loops 
+					-fomit-frame-pointer -ffunction-sections -s -fno-stack-protector -fno-strict-aliasing -funroll-loops 
 					#-ffunction-sections # -fdata-sections
 	LDFLAGS	= "-Wl,-O1 "
 #	-Wl,--gc-sections"
