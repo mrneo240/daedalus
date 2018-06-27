@@ -188,7 +188,8 @@ ifdef DEBUG
 
 else
 	CFLAGS	= -O2 -G0 -DNDEBUG -Wall -MD -ffast-math -fsingle-precision-constant  \
-					-Wextra 
+					-Wextra \
+					-fomit-frame-pointer -ml -m4-single-only -ffunction-sections -s -fno-stack-protector -fno-strict-aliasing
 					#-funroll-loops 
 					#-ffunction-sections # -fdata-sections
 	LDFLAGS	= "-Wl,-O1 "
@@ -230,7 +231,7 @@ LIBS = -lstdc++ -lpsppower -lpspgu -lpspaudio -lpsprtc -lc -lintrafont -lpng -lz
 
 EXTRA_TARGETS = EBOOT.PBP dvemgr.prx exception.prx mediaengine.prx imposectrl.prx daedalus.a $(CORE_OBJS)
 
-PSP_EBOOT_TITLE = DaedalusX64 z2442 $(CONFIG) update_JoynerLucas
+PSP_EBOOT_TITLE = DaedalusX64 $(CONFIG) update_JoynerLucas
 PSP_EBOOT_ICON  = icon0.png
 PSP_EBOOT_PIC1  = pic1.png
 #PSP_EBOOT_ICON1 = ICON1.PMF
