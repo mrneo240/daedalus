@@ -83,8 +83,6 @@ CORE_SRCS = \
 	$(SRCDIR)/SysPSP/DynaRec/N64RegisterCachePSP.cpp \
 	$(SRCDIR)/SysPSP/Graphics/DrawText.cpp \
 	$(SRCDIR)/SysPSP/Graphics/GraphicsContext.cpp \
-	$(SRCDIR)/SysPSP/Graphics/intraFont/intraFont.c \
-	$(SRCDIR)/SysPSP/Graphics/intraFont/libccc.c \
 	$(SRCDIR)/SysPSP/Graphics/NativeTexturePSP.cpp \
 	$(SRCDIR)/SysPSP/Graphics/VideoMemoryManager.cpp \
 	$(SRCDIR)/SysPSP/HLEAudio/AudioOutput.cpp \
@@ -189,11 +187,12 @@ ifdef DEBUG
 				#-Winline -Wcast-align
 
 else
-	CFLAGS	= -O2 -G0  -DNDEBUG -Wall -MD -ffast-math -fsingle-precision-constant  \
-					-Wextra \
-					-funroll-loops 
-#					-ffunction-sections -fdata-sections
-	LDFLAGS	= "-Wl,-O1  -Wl,--gc-sections"
+	CFLAGS	= -O2 -G0 -DNDEBUG -Wall -MD -ffast-math -fsingle-precision-constant  \
+					-Wextra 
+					#-funroll-loops 
+					#-ffunction-sections # -fdata-sections
+	LDFLAGS	= "-Wl,-O1 "
+#	-Wl,--gc-sections"
 endif
 endif
 
@@ -227,7 +226,7 @@ INCDIR = $(PSPDEV)/SDK/include ./SDK/include
 LIBDIR = $(PSPDEV)/SDK/lib ./SDK/lib
 
 
-LIBS = -lstdc++ -lpsppower -lpspgu -lpspaudio -lpsprtc -lc -lpng -lz -lg -lm -lpspfpu -lpspkubridge
+LIBS = -lstdc++ -lpsppower -lpspgu -lpspaudio -lpsprtc -lc -lintrafont -lpng -lz -lg -lm -lpspfpu -lpspkubridge 
 
 EXTRA_TARGETS = EBOOT.PBP dvemgr.prx exception.prx mediaengine.prx imposectrl.prx daedalus.a $(CORE_OBJS)
 
@@ -241,7 +240,7 @@ PSP_EBOOT_PIC1  = pic1.png
 
 PSPSDK=$(shell psp-config --pspsdk-path)
 #USE_PSPSDK_LIBC=1
-PSP_FW_VERSION=600
+PSP_FW_VERSION=500
 BUILD_PRX = 1
 PSP_LARGE_MEMORY = 1
 

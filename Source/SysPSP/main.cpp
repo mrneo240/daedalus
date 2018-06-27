@@ -292,11 +292,10 @@ static bool	Initialize()
 
 	// If (o) is pressed during boot the Emulator will use 32bit
 	// else use default 16bit color mode
-	//SceCtrlData pad;
-	//sceCtrlPeekBufferPositive(&pad, 1);
-	//if( pad.Buttons & PSP_CTRL_CIRCLE ) g32bitColorMode = true;
-	//else g32bitColorMode = false;
-	g32bitColorMode = true;
+	SceCtrlData pad;
+	sceCtrlPeekBufferPositive(&pad, 1);
+	if( pad.Buttons & PSP_CTRL_CIRCLE ) g32bitColorMode = true;
+	else g32bitColorMode = false;
 
 	// Check for unsupported FW >=4.01 (We use M33 SDK 4.01)
 	// Otherwise PSP model can't be detected correctly

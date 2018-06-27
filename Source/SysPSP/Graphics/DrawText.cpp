@@ -47,8 +47,8 @@ void	CDrawText::Initialise()
 {
     intraFontInit();
 
-	gFonts[ F_REGULAR ] = intraFontLoad( "flash0:/font/ltn8.pgf", INTRAFONT_CACHE_ASCII | INTRAFONT_STRING_UTF8 );			// Regular/sans-serif
-	gFonts[ F_LARGE_BOLD ] = intraFontLoad( "flash0:/font/ltn4.pgf", INTRAFONT_CACHE_ASCII | INTRAFONT_STRING_UTF8 );		// Large/sans-serif/bold
+	gFonts[ F_REGULAR ] = intraFontLoad( "flash0:/font/ltn8.pgf", INTRAFONT_CACHE_ALL | INTRAFONT_STRING_UTF8 );			// Regular/sans-serif
+	gFonts[ F_LARGE_BOLD ] = intraFontLoad( "flash0:/font/ltn4.pgf", INTRAFONT_CACHE_ALL | INTRAFONT_STRING_UTF8 );		// Large/sans-serif/bold
 
 	for( u32 i = 0; i < NUM_FONTS; ++i )
 	{
